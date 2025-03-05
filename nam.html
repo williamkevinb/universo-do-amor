@@ -1,0 +1,197 @@
+<!DOCTYPE html>
+<html lang="pt-br">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Universo do Amor</title>
+    <style>
+        /* Fundo azul marinho */
+        body {
+            margin: 0;
+            padding: 0;
+            height: 100vh;
+            background-color: #001f3d; /* Azul marinho */
+            font-family: 'Arial', sans-serif;
+            color: white;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            flex-direction: column;
+            text-align: center;
+            overflow: hidden;
+        }
+
+        /* Estilo da caixa de mensagem */
+        .message-box {
+            background: rgba(0, 0, 0, 0.7);
+            padding: 40px;
+            border-radius: 10px;
+            box-shadow: 0 0 20px rgba(0, 0, 0, 0.6);
+            max-width: 600px;
+            width: 100%;
+        }
+
+        h1 {
+            font-size: 3rem;
+            margin: 0;
+        }
+
+        p {
+            font-size: 1.2rem;
+            margin-top: 20px;
+        }
+
+        .button {
+            margin-top: 30px;
+            padding: 15px 30px;
+            background-color: #ff4081;
+            color: white;
+            border: none;
+            border-radius: 30px;
+            font-size: 1.2rem;
+            cursor: pointer;
+            transition: background-color 0.3s;
+        }
+
+        .button:hover {
+            background-color: #e60073;
+        }
+
+        .heart {
+            display: inline-block;
+            font-size: 2rem;
+            margin-top: 20px;
+            cursor: pointer;
+            transition: transform 0.3s;
+        }
+
+        .heart:hover {
+            transform: scale(1.2);
+        }
+
+        .button-container {
+            display: flex;
+            justify-content: center;
+            gap: 20px;
+        }
+
+        .no-button {
+            position: relative;
+        }
+
+        /* Tela que aparece ao clicar em "Sim" */
+        #love-screen {
+            display: none;
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100vw;
+            height: 100vh;
+            background-color: rgba(0, 0, 0, 0.8);
+            justify-content: center;
+            align-items: center;
+            color: white;
+            font-size: 2rem;
+            text-align: center;
+        }
+
+        /* Animação dos corações */
+        .heart-animation {
+            position: absolute;
+            font-size: 3rem;
+            animation: float 3s ease-in-out infinite;
+        }
+
+        @keyframes float {
+            0% {
+                transform: translateY(0);
+            }
+            50% {
+                transform: translateY(-100px);
+            }
+            100% {
+                transform: translateY(0);
+            }
+        }
+
+        /* Estilo para a mensagem de recusa ao "Não" */
+        #no-response {
+            color: #ff4081;
+            font-size: 1.5rem;
+            font-weight: bold;
+            display: none;
+        }
+
+    </style>
+</head>
+<body>
+
+    <div class="message-box">
+        <h1>Você é o meu universo!</h1>
+        <p>Entre estrelas e constelações, encontrei você. E com você, posso alcançar todos os planetas do amor!</p>
+        <div class="button-container">
+            <button class="button" id="sim" onclick="showLoveScreen()">Sim</button>
+            <button class="button no-button" id="nao" onclick="moveButton()">Não</button>
+        </div>
+        <div id="extra-message" style="display: none; margin-top: 20px; color: #ff4081;">
+            <p>Você realmente iluminou meu universo! 💫</p>
+        </div>
+    </div>
+
+    <!-- Tela de amor que aparece ao clicar em "Sim" -->
+    <div id="love-screen">
+        <div>
+            <h2>Eu te amo! 💖</h2>
+            <p>Você é a estrela que ilumina meu caminho!</p>
+            <!-- Corações animados -->
+            <div class="heart-animation" style="left: 20%;">❤️</div>
+            <div class="heart-animation" style="left: 40%; animation-delay: 0.5s;">❤️</div>
+            <div class="heart-animation" style="left: 60%; animation-delay: 1s;">❤️</div>
+            <div class="heart-animation" style="left: 80%; animation-delay: 1.5s;">❤️</div>
+        </div>
+    </div>
+
+    <!-- Mensagem de "não aceito não" -->
+    <div id="no-response">
+        <p>Você não pode me dizer "não"! Eu não aceito um "não" como resposta! 😜</p>
+    </div>
+
+    <script>
+        // Função para exibir a tela de "amor" ao clicar em "Sim"
+        function showLoveScreen() {
+            // Oculta a tela inicial
+            document.querySelector('.message-box').style.display = 'none';
+
+            // Exibe a tela de amor
+            document.getElementById('love-screen').style.display = 'flex';
+        }
+
+        // Função para mover o botão "Não" quando clicado
+        function moveButton() {
+            const naoButton = document.getElementById('nao');
+            const noResponse = document.getElementById('no-response');
+            const randomX = Math.floor(Math.random() * 80) + 10; // Move o botão para uma posição aleatória dentro da tela
+            const randomY = Math.floor(Math.random() * 80) + 10;
+
+            // Desabilita o botão e move
+            naoButton.style.position = 'absolute';
+            naoButton.style.left = `${randomX}%`;
+            naoButton.style.top = `${randomY}%`;
+            naoButton.style.transition = 'all 0.5s ease';
+            naoButton.disabled = true;  // Desabilita o botão "Não"
+
+            // Exibe a mensagem engraçada de "não aceito não"
+            noResponse.style.display = 'block';
+            setTimeout(function() {
+                noResponse.style.display = 'none';
+                // Reposiciona o botão "Não" de volta à sua posição inicial após a animação
+                naoButton.style.position = 'relative';
+                naoButton.style.left = '0';
+                naoButton.style.top = '0';
+                naoButton.disabled = false; // Habilita o botão novamente
+            }, 2000);  // A mensagem ficará visível por 2 segundos
+        }
+    </script>
+
+</body>
+</html>
